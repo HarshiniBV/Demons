@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="./create.css">
+<title>WriteWise</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    #container {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    .post {
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+        padding: 10px;
+    }
+    .post button {
+        margin-right: 5px;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body class="it">
+
+    <nav>
+        <img class="img9" src="./logo.jpg" alt="">
+        <ul id="one">
+            <li>Home</li>
+            <li>
+                <a class="four" href="./login.html">Login</a>
+            </li>
+            <li>
+                <a class="four" href="./about.html">Logout</a>
+            </li>
+        </ul>
+    </nav>
+
+<div id="container">
+    <br>
+    <br>
+    <h1>Create POST</h1>
+    <br> <br> <br>
+    <div id="new-post">
+        <input type="text" id="poster-name" placeholder="Your Name"><br>
+        <input type="text" id="post-topic" placeholder="Post Topic"><br>
+        <textarea id="post-text" placeholder="Write something..."></textarea><br>
+        <button onclick="addPost()">Post</button>
+        <br>
+    </div>
+    <div id="posts"></div>
+</div>
+
+<script>
+    // Array to store posts
+    let posts = [];
+
+    // Function to add a new post
+    function addPost() {
+        let posterName = document.getElementById("poster-name").value;
+        let postTopic = document.getElementById("post-topic").value;
+        let postText = document.getElementById("post-text").value;
+        if (posterName.trim() !== "" && postTopic.trim() !== "" && postText.trim() !== "") {
+            let post = {
+                id: Date.now(), // Unique ID for each post
+                name: posterName,
+                topic: postTopic,
+                text: postText,
+                timestamp: new Date().toLocaleString() // Timestamp of the post
+            };
+            posts.push(post);
+            displayPosts();
+            document.getElementById("poster-name").value = ""; // Clear the name input field
+            document.getElementById("post-topic").value = ""; // Clear the topic input field
+            document.getElementById("post-text").value = ""; // Clear the textarea
+        }
+    }
+
+    // Function to display all posts
+    function displayPosts() {
+        let postsContainer = document.getElementById("posts");
+        postsContainer.innerHTML = ""; // Clear previous posts
+        posts.forEach(post => {
+            let postElement = document.createElement("div");
+            postElement.classList.add("post");
+            postElement.innerHTML = `
+                <p><strong>${post.name}</strong> posted on <em>${post.topic}</em> at ${post.timestamp}</p>
+                <p>${post.text}</p>
+                <button onclick="editPost(${post.id})">Edit</button>
+                <button onclick="deletePost(${post.id})">Delete</button>
+            `;
+            postsContainer.appendChild(postElement);
+        });
+    }
+
+    // Function to edit a post
+    function editPost(id) {
+        let postIndex = posts.findIndex(post => post.id === id);
+        let newText = prompt("Edit your post:", posts[postIndex].text);
+        if (newText !== null) {
+            posts[postIndex].text = newText;
+            displayPosts();
+        }
+    }
+
+    // Function to delete a post
+    function deletePost(id) {
+        posts = posts.filter(post => post.id !== id);
+        displayPosts();
+    }
+
+    // Initial display of posts
+    displayPosts();
+</script>
+<br>
+
+<div id="posts-container">
+    <!-- Posts will be dynamically inserted here -->
+  </div>
+  <br>
+  <br> <br>
+  <br>
+  <br><br>
+  <br>
+  <br>
+  <br> <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br> <br>
+  <br>
+  <br>
+  <br>
+  <footer class="foot ">
+    <address>
+        <p class="parag">VNRVJIET</p>
+        <p class="parag">Bachupally</p>
+        <p class="parag">Telangana</p>
+    </address>
+    <div class="contact">
+     <p class="parag">writewise@gmail.com</p>
+    </div>
+    <p class="parag">9876056733</p>
+</footer>
+
+  <script src="script.js"></script>
+
+
+
+</body>
+</html>
+
